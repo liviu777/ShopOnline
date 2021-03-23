@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="#{products.title}"> Products </h1>
+<h2 th:text="${category.getDescription()}"></h2>
+<table>
+    <tr>
+        <th>Id</th>
+        <th th:text="#{nameP}">Name</th>
+        <th th:text="#{description}">Description</th>
+        <th th:text="#{price}">Price</th>
+        <th th:text="#{stock}">Stock</th>
+        <th th:text="#{actions}">Actions</th>
+    </tr>
+
+    <tr th:each = " p : ${category.getProducts()}">
+        <td th:text ="${p.getProductId()}"></td>
+        <td th:text ="${p.getProductName()}"></td>
+        <td th:text ="${p.getProductDescription()}"></td>
+        <td th:text ="${p.getPrice()}"></td>
+        <td th:text ="${p.getProductStock()}"></td>
+        <td>
+            <a th:href ="@{'/products/edit/' + ${p.getProductId()}}" th:text="#{edit}">Edit</a>
+            <a th:href ="@{'/products/delete/' + ${p.getProductId()}}" th:text="#{delete}">Delete</a>
+        </td>
+    </tr>
+</table>
+<a th:href ="@{'/products/add/'+ ${category.getProductCategoryId()}}" th:text="#{addP}">Add product</a>
+</body>
+</html>

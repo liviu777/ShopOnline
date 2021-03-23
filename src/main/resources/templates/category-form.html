@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="#{addC}"> Add Category </h1>
+
+<form method="post" action="/categories/save" th:object="${category}">
+<input type="hidden" name ="id" th:field = "*{productCategoryId}">
+<!--    <spam th:if=" ${#fields.hasErrors('description')}"-->
+<!--          th:each="err:${#fields.errors('description')}"-->
+<!--          th:utext="${err} + '</br>'">-->
+
+<!--    </spam>-->
+
+    <!--  -->
+    <span th:if=" ${#fields.hasErrors('description')}"
+          th:each="err,stat:${#fields.errors('description')}"
+          th:utext="!${stat.last}?${err} + '</br>': ${err}">
+
+    </span>
+    <br>
+    <label name="Description" for="description" th:text="#{description}">Description</label>
+    <input type="text" maxlength="50" name="Description" id = "description"  placeholder="Category description" th:field="*{description}">
+    <input type="submit" value="Save" th:text="#{save}">
+
+</form>
+</body>
+</html>

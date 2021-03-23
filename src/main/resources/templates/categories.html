@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="#{categories.title}"> Category List</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th th:text="#{description}">Description</th>
+        <th th:text="#{actions}">Actions</th>
+    </tr>
+    <tr th:each = "category : ${categoryList}">
+        <td th:text="${category.getProductCategoryId()}">
+        </td>
+
+        <td th:text = "${category.getDescription()}"></td>
+        <td>
+            <a th:href="@{'/categories/edit/' + ${category.getProductCategoryId()}}" th:text="#{edit}"> Edit </a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <a th:href="@{'/categories/delete/' + ${category.getProductCategoryId()}}" th:text="#{delete}"> Delete </a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <a th:href="@{'/view-products/' + ${category.getProductCategoryId()}}" th:text="#{view}"> View Products </a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+        </td>
+    </tr>
+</table>
+<a href="category/add" th:text="#{addC}"> Add Category</a>
+
+</body>
+</html>

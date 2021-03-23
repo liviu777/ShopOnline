@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:text="#{product-form.title}">Product form</h1>
+
+<form method="post" action="/products/save" th:object="${product}">
+    <br>
+    <input type="hidden" name="categoryId" th:field="*{productCategoryId}">
+    <input type="hidden" name="productId" th:field="*{productId}">
+    <br>
+    <span th:if=" ${#fields.hasErrors('productName')}"
+          th:each="err,stat:${#fields.errors('productName')}"
+          th:utext="!${stat.last}?${err} +'<br>' : ${err}">
+    </span>
+    <br>
+    <label for="name" th:text="#{nameP}"> Name</label>
+    <input type="text" id="name" name="name" placeholder="Product name" th:field="*{productName}">
+    <br>
+
+    <span th:if="${#fields.hasErrors('productDescription')}"
+          th:each="err,stat:${#fields.errors('productDescription')}"
+          th:utext="!${stat.last}?${err} + '<br>': ${err}">
+   </span>
+
+    <br>
+    <label for="description" th:text="#{description}"> Description</label>
+    <input type="text" id="description" name="description" placeholder="Product description"
+           th:field="*{productDescription}">
+    <br>
+
+    <span th:if="${#fields.hasErrors('price')}"
+          th:each="err,stat:${#fields.errors('price')}"
+          th:utext="!${stat.last}?${err} + '<br>':${err}"></span>
+    <br>
+    <label for="price" th:text="#{price}"> Price</label>
+    <input type="number" id="price" name="price" placeholder="Product price" th:field="*{price}">
+    <br>
+
+    <span th:if="${#fields.hasErrors('productStock')}"
+          th:each="err,stat:${#fields.errors('productStock')}"
+          th:utext="!${stat.last}?${err} + '<br>':${err}"></span>
+    <br>
+    <label for="stock" th:text="#{stock}"> Stock</label>
+    <input type="number" id="stock" name="stock" placeholder="Product stock" th:field="*{productStock}">
+    <br>
+    <input type="submit" th:text="#{save}">
+</form>
+
+</body>
+</html>
